@@ -21,7 +21,8 @@ def guesser(sel_driver):
                 if word_guessed:
                     print(f"{nicknames[i].text} guessed word {word_guessed.russian} ({word_guessed.english})")
                     req.get(f'http://127.0.0.1:5000/set_words/{[word.russian for word in words]}')
-
+            if not words:
+                break
         except Exception:
             continue
 
