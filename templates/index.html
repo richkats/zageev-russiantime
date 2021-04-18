@@ -5,10 +5,18 @@
 	<title>RUSSIAN WORDS</title>
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
  <font face="Bahnschrift Condensed" size="50px">
- 	<a href="/index/0" {{attribs[0]}}><p>{{words[0]}}</p></a>
- 	<a href="/index/1" {{attribs[1]}}><p>{{words[1]}}</p></a>
- 	<a href="/index/2" {{attribs[2]}}><p>{{words[2]}}</p></a>
+ 	<p id="word0"></p>
+ 	<p id="word1"></p>
+ 	<p id="word2"></p>
  </font>
+<script>
+setInterval(function(){ // load the data from your endpoint into the div
+    $("#word0").load("/get_words/0")
+    $("#word1").load("/get_words/1")
+    $("#word2").load("/get_words/2")
+},1000)
+</script>
 </body>
 </html>
