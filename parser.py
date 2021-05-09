@@ -37,47 +37,35 @@ def login(username, password, driver):
     driver.implicitly_wait(10)
 
 
-def start_driver():
+def start_driver(d_type="chrome"):
     global chrome_options, driver
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--mute-audio")
-
-    driver = webdriver.Chrome(chrome_options=chrome_options)  # Optional argument, if not specified will search path.
+    if d_type in ["chrome", "c"]:
+        driver = webdriver.Chrome(chrome_options=chrome_options)  # Optional argument, if not specified will search path.
+    elif d_type in ["opera", "o"]:
+        driver = webdriver.Opera(options=chrome_options)
     driver.get('https://www.twitch.tv/zageev')
 
 
-start_driver()
+d_type = input("Insert your browser type: opera (o) or chrome (c): ")
+
+start_driver(d_type)
 while True:
     time.sleep(1)
     try:
         events = driver.find_elements_by_class_name('tw-c-text-alt-2')
         for event in events:
-            if "Guess 3 russian words" in event.text:
+            if "Guess 3 russian words" in event.text or True:
                 print(event.text)
                 guesser(driver)
                 driver.quit()
-                start_driver()
+                start_driver(d_type)
                 break
     except Exception:
         continue
 
 
-
-
-#login(USER, PASS)
-
-#time.sleep(5) # Let the user actually see something!
-#search_box = driver.find_element_by_name('q')
-#text = input("INSERT YOUR TEXT: ")
-#search_box.send_keys(text)
-#search_box.submit()
-time.sleep(60) # Let the user actually see something!
-'''
-for i in range(5):
-    sites = driver.find_elements_by_tag_name("link")
-    for site in sites:
-        print(site.get_attribute("href"))
-    time.sleep(5)
-'''
+time.sleep(60)
 
 driver.quit()
