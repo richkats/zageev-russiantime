@@ -45,7 +45,7 @@ def start_driver(d_type="chrome"):
         driver = webdriver.Chrome(chrome_options=chrome_options)  # Optional argument, if not specified will search path.
     elif d_type in ["opera", "o"]:
         driver = webdriver.Opera(options=chrome_options)
-    driver.get('https://www.twitch.tv/zageev')
+    driver.get('https://www.twitch.tv/popout/zageev/chat?popout=')
 
 
 d_type = input("Insert your browser type: opera (o) or chrome (c): ")
@@ -56,7 +56,7 @@ while True:
     try:
         events = driver.find_elements_by_class_name('tw-c-text-alt-2')
         for event in events:
-            if "Guess 3 russian words" in event.text or True:
+            if "Guess 3 russian words" in event.text:
                 print(event.text)
                 guesser(driver)
                 driver.quit()
